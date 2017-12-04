@@ -9,34 +9,66 @@
 </head>
 	<body class="body">
 		<h2>Welcome to your blog</h2>
-		<form class="form-border" action="/add_post" method="POST">
-			<div class="title wrapper">
-				<input id="input-title" type="text" name="title" placeholder="Title"></input>
-			</div>
-
-			<div class="title wrapper">
-				<textarea id="input-post" name="post"></textarea>
-			</div>
-			<div  class="description wrapper">
-				<input type="submit" id="input-submit" value="POST"></input>
-			</div>
-		</form>
-
-		{% for post in posts %}
-			<div class="blog-border">
-				<div class="title">
-					<div> {{ post.title }} </div>
+		{% if isOnMain %}
+			<form class="form-border" action="/add_post" method="POST">
+				<div class="title wrapper">
+					<input id="input-title" type="text" name="title" placeholder="Title"></input>
 				</div>
-				<div class="post">
-					<div> {{ post.post }} </div>
+
+				<div class="title wrapper">
+					<textarea id="input-post" name="post"></textarea>
 				</div>
-		  	</div>
-		{% endfor %}
-	
+				<div  class="description wrapper">
+					<input type="submit" id="input-submit" value="POST"></input>
+				</div>
+			</form>
+		{%else%}
+			<form class="form-border" action="/edit/{{currentBlog._id}}" method="POST">
+				<div class="title wrapper">
+					<input id="input-title" type="text" name="title" placeholder="Title" value= "{{currentBlog.title}}"></input>
+				</div>
+
+				<div class="title wrapper">
+					<textarea id="input-post" type="test" name="post">{{currentBlog.post}}</textarea>
+				</div>
+				<div  class="description wrapper">
+					<input type="submit" id="input-submit" value="SUBMIT"></input>
+				</div>
+			</form>
+		{%endif%}
+		{% if isOnMain %}
+			{% for post in posts %}
+				<div class="blog-border">
+					<div style="display: none;">{{post._id}}</div>
+					<input type="hidden" id = "_id" name="_id" value = {{post._id}}>
+					<div class="title">
+						<div> {{ post.title }} </div>
+						<!-- <input type="text" id = "title" name="title" value = "{{post.title}}"> -->
+
+					</div>
+					<div class="post">
+						<div> {{ post.post }} </div>
+						<!-- <input type="text" id = "post" name="post" value = "{{post.post}}"> -->
+
+					</div>
+					<div>
+						<a href="/post/{{post._id}}">
+							<button>
+							EDIT
+							</button>
+						</a> 
+
+						<a href="/delete_this/{{post._id}}">
+							<button>
+							DELETE
+							</button>
+						</a> 
+					</div>
+			  	</div>
+			{% endfor %}
+		{% endif %}
 	</body>
-
 </html>
-
 
 
 

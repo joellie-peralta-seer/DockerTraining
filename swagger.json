@@ -83,6 +83,66 @@
           }
         }
       }
+    },
+    "/edit/{post_id}": {
+      "parameters" : [{
+        "in":"path",
+        "name":"post_id",
+        "description":"Id of Post",
+        "required":"true",
+        "type":"string",
+      }],
+      "put": {
+        "tags": [
+          "blog post"
+        ],
+        "summary": "Edit a blog post",
+        "description": "",
+        "operationId": "editPosts",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "[{'title':title,'post':post, _id:id}]"
+          }
+        }
+      }
+    },
+    "/delete_this/{post_id}": {
+      "parameters" : [{
+        "in":"path",
+        "name":"post_id",
+        "description":"Id of Post",
+        "required":"true",
+        "type":"string",
+      }],
+      "delete": {
+        "tags": [
+          "blog post"
+        ],
+        "summary": "Delete a blog post",
+        "description": "",
+        "operationId": "deletePosts",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "[{'title':title,'post':post, _id:id}]"
+          }
+        }
+      }
     }
   },
   "definitions": {
